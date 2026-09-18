@@ -4,8 +4,7 @@ import './globals.css'
 
 export const metadata: Metadata = {
   title: 'Billuu | Restaurant POS',
-  description: 'A calm, fast restaurant billing and point-of-sale workspace.',
-  generator: 'v0.app',
+  description: 'A fast, simple billing and point-of-sale system built for restaurant staff to manage orders and generate bills.',
   icons: {
     icon: [
       {
