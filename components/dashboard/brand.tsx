@@ -1,4 +1,4 @@
-import { Utensils } from 'lucide-react'
+import { Utensils } from 'lucide-react';
 
 export function Brand() {
   return (
@@ -7,9 +7,13 @@ export function Brand() {
         <Utensils className="size-5" />
       </div>
       <div>
-        <p className="text-lg font-bold tracking-tight text-white">bill<span className="text-[#84964f]">u</span>u</p>
-        <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#a89c85]">Restaurant POS</p>
+        <p className="text-lg font-bold tracking-tight text-white">
+          bill<span className="text-[#84964f]">u</span>u
+        </p>
+        <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#a89c85]">
+          Restaurant POS
+        </p>
       </div>
     </div>
-  )
+  );
 }
