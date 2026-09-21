@@ -46,7 +46,8 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 ## Roadmap
 
 - [ ] Persist data with a real database
-- [ ] [add anything else you're planning]
+- [ ] Add real authentication (currently uses mock login credentials)
+- [ ] Split the dashboard into smaller, reusable components
 
 ## Author
 
