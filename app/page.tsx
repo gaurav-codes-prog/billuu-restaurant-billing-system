@@ -1,5 +1,5 @@
-import BilluuDashboard from '@/components/billuu-dashboard'
+import BilluuDashboard from '@/components/billuu-dashboard';
 
 export default function Home() {
-  return <BilluuDashboard />
+  return <BilluuDashboard />;
 }

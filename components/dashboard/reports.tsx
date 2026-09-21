@@ -1,13 +1,97 @@
-'use client'
+'use client';
 
-import { useState } from 'react'
-import { reportDatasets } from '@/lib/dashboard-data'
-import { formatCurrency } from '@/lib/dashboard-types'
+import { useState } from 'react';
+import { reportDatasets } from '@/lib/dashboard-data';
+import { formatCurrency } from '@/lib/dashboard-types';
 
 export function Reports() {
-  const [range, setRange] = useState<keyof typeof reportDatasets>('Last 7 days')
-  const reportDays = reportDatasets[range]
-  const revenue = reportDays.reduce((sum, day) => sum + day.value, 0)
-  const max = Math.max(...reportDays.map((day) => day.value))
-  return <div className="flex flex-col gap-6"><div className="flex flex-wrap items-center justify-between gap-3"><div><h2 className="text-lg font-bold text-[#3a3020]">Sales reports</h2><p className="mt-1 text-sm text-[#8a7f6c]">Track revenue trends and best-performing dishes.</p></div><select value={range} onChange={(e) => setRange(e.target.value as keyof typeof reportDatasets)} className="rounded-xl border border-[#e3dcc8] bg-[#fffdf7] px-3 py-2.5 text-sm font-semibold text-[#5c5240]"><option>Today</option><option>Last 7 days</option><option>Last 30 days</option></select></div><div className="grid gap-6 xl:grid-cols-[1.4fr_1fr]"><section className="rounded-2xl border border-[#e3dcc8]/80 bg-[#fffdf7] p-5 shadow-sm"><div className="flex items-center justify-between"><div><h3 className="font-semibold text-[#3a3020]">Revenue overview</h3><p className="mt-1 text-xs text-[#8a7f6c]">{range} · Gross sales</p></div><p className="text-xl font-bold text-[#55672f]">{formatCurrency(revenue)}</p></div><div className="mt-8 flex h-56 items-end justify-between gap-3">{reportDays.map((day) => <div key={day.day} className="flex h-full flex-1 flex-col items-center justify-end gap-2"><div className="w-full max-w-12 rounded-t-lg bg-[#84964f] transition hover:bg-[#6b7f3f]" style={{ height: `${(day.value / max) * 82}%` }} title={formatCurrency(day.value)} /><span className="text-xs font-medium text-[#8a7f6c]">{day.day}</span></div>)}</div></section><section className="rounded-2xl border border-[#e3dcc8]/80 bg-[#fffdf7] p-5 shadow-sm"><h3 className="font-semibold text-[#3a3020]">Top selling items</h3><p className="mt-1 text-xs text-[#8a7f6c]">By units sold this period</p><div className="mt-5 flex flex-col gap-4">{[['Truffle Mushroom Pasta', 42], ['Classic Cheeseburger', 36], ['Iced Matcha Latte', 29], ['Garlic Butter Prawns', 24]].map(([name, count], index) => <div key={String(name)}><div className="flex justify-between text-sm"><span className="font-medium text-[#5c5240]">{index + 1}. {name}</span><span className="font-bold text-[#3a3020]">{count}</span></div><div className="mt-2 h-2 rounded-full bg-[#ede6d4]"><div className="h-2 rounded-full bg-[#84964f]" style={{ width: `${Number(count) / 42 * 100}%` }} /></div></div>)}</div></section></div></div>
+  const [range, setRange] =
+    useState<keyof typeof reportDatasets>('Last 7 days');
+  const reportDays = reportDatasets[range];
+  const revenue = reportDays.reduce((sum, day) => sum + day.value, 0);
+  const max = Math.max(...reportDays.map((day) => day.value));
+  return (
+    <div className="flex flex-col gap-6">
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <div>
+          <h2 className="text-lg font-bold text-[#3a3020]">Sales reports</h2>
+          <p className="mt-1 text-sm text-[#8a7f6c]">
+            Track revenue trends and best-performing dishes.
+          </p>
+        </div>
+        <select
+          value={range}
+          onChange={(e) =>
+            setRange(e.target.value as keyof typeof reportDatasets)
+          }
+          className="rounded-xl border border-[#e3dcc8] bg-[#fffdf7] px-3 py-2.5 text-sm font-semibold text-[#5c5240]"
+        >
+          <option>Today</option>
+          <option>Last 7 days</option>
+          <option>Last 30 days</option>
+        </select>
+      </div>
+      <div className="grid gap-6 xl:grid-cols-[1.4fr_1fr]">
+        <section className="rounded-2xl border border-[#e3dcc8]/80 bg-[#fffdf7] p-5 shadow-sm">
+          <div className="flex items-center justify-between">
+            <div>
+              <h3 className="font-semibold text-[#3a3020]">Revenue overview</h3>
+              <p className="mt-1 text-xs text-[#8a7f6c]">
+                {range} · Gross sales
+              </p>
+            </div>
+            <p className="text-xl font-bold text-[#55672f]">
+              {formatCurrency(revenue)}
+            </p>
+          </div>
+          <div className="mt-8 flex h-56 items-end justify-between gap-3">
+            {reportDays.map((day) => (
+              <div
+                key={day.day}
+                className="flex h-full flex-1 flex-col items-center justify-end gap-2"
+              >
+                <div
+                  className="w-full max-w-12 rounded-t-lg bg-[#84964f] transition hover:bg-[#6b7f3f]"
+                  style={{ height: `${(day.value / max) * 82}%` }}
+                  title={formatCurrency(day.value)}
+                />
+                <span className="text-xs font-medium text-[#8a7f6c]">
+                  {day.day}
+                </span>
+              </div>
+            ))}
+          </div>
+        </section>
+        <section className="rounded-2xl border border-[#e3dcc8]/80 bg-[#fffdf7] p-5 shadow-sm">
+          <h3 className="font-semibold text-[#3a3020]">Top selling items</h3>
+          <p className="mt-1 text-xs text-[#8a7f6c]">
+            By units sold this period
+          </p>
+          <div className="mt-5 flex flex-col gap-4">
+            {[
+              ['Truffle Mushroom Pasta', 42],
+              ['Classic Cheeseburger', 36],
+              ['Iced Matcha Latte', 29],
+              ['Garlic Butter Prawns', 24],
+            ].map(([name, count], index) => (
+              <div key={String(name)}>
+                <div className="flex justify-between text-sm">
+                  <span className="font-medium text-[#5c5240]">
+                    {index + 1}. {name}
+                  </span>
+                  <span className="font-bold text-[#3a3020]">{count}</span>
+                </div>
+                <div className="mt-2 h-2 rounded-full bg-[#ede6d4]">
+                  <div
+                    className="h-2 rounded-full bg-[#84964f]"
+                    style={{ width: `${(Number(count) / 42) * 100}%` }}
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      </div>
+    </div>
+  );
 }
